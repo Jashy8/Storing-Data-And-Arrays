@@ -1,3 +1,46 @@
+/*// types of data
+// numbers
+var num = 234;
+console.log(num);
+
+//string
+var str = "Hello, I am a string";
+console.log(str);
+
+//boolean
+var bool = true;
+console.log(bool);
+
+//undefined
+var object;
+console.log(object);
+
+//reassigning undefined object to null
+object = null;
+console.log(object);
+
+//arrays
+// arrays storing same type of data
+var arr1 = [655,988,55782,1009,6441];
+console.log(arr1);
+console.log(arr1[3]);
+
+//arrays storing different data types
+var arr2 = ["Hey", "Hello World", 654, false, null];
+console.log(arr2);
+
+//arrays storing list of arrays
+var arr3 = [[544,987,987],["hey, there",987,true],[5436,0989,654,543]];
+console.log(arr3);
+//subindexing
+console.log(arr3[2][1]);
+
+arr3.push(7887);
+console.log(arr3);
+
+arr3.pop();
+console.log(arr3);
+*/
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -6,6 +49,8 @@ const Constraint = Matter.Constraint;
 var engine, world;
 var box1, pig1;
 var backgroundImg,platform;
+
+var gameState = "start";
 
 function preload() {
     backgroundImg = loadImage("sprites/bg.png");
@@ -70,10 +115,13 @@ function draw(){
 
 function mouseReleased(){
     slingshot.fly();
+    gameState = "play";
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body,{x: mouseX,y: mouseY});
+    if(gameState !== "play"){
+        Matter.Body.setPosition(bird.body,{x: mouseX,y: mouseY});
+    }
 }
 
 function keyPressed(){
